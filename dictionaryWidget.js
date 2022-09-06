@@ -122,6 +122,21 @@ function addGoogleFont(fontName) {
 }
 
 
+function activateTestMode(hasColorizedSegments) {
+  // Make it easier to understand behavior by colorizing elements.
+  if (hasColorizedSegments) {
+    const displayElmnt = document.getElementById("entry-word");
+    displayElmnt.style.backgroundColor = "#92DE8B";
+    
+    const timerElmnt = document.getElementById("meaning");
+    timerElmnt.style.backgroundColor = "#FB836F";
+  }
+  
+  // Some mock-up text.
+  changeEntry("Lorem Ipsum", "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+}
+
+
 function onWidgetLoad(obj) {
   const fieldData = obj.detail.fieldData;
   
@@ -167,10 +182,11 @@ function onWidgetLoad(obj) {
   addGoogleFont(fieldData.overlayFontFamily_entryWord);
   addGoogleFont(fieldData.overlayFontFamily_meaning);
   
+  cooldown.cooldownMillis = fieldData.cooldown * 1000;
   displayMillis = fieldData.displayDuration * 1000;
   
   if (fieldData.testMode === 'on') {
-    changeEntry("Lorem Ipsum", "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+    activateTestMode(fieldData.hasColorizedSegments);
   }
   
   isBlocked = false;
@@ -180,6 +196,17 @@ function onWidgetLoad(obj) {
 async function onMessage(msg) {
   if (isBlocked) {
     //console.log("Widget is currently blocked.");
+    return;
+  }
+  
+  if (cooldown.isActive()) {
+    //console.log("Cooldown is still running.");
+    return;
+  }
+  
+  // Blocked users are rejected.
+  if (msg.usernameOnList(blockedUsers)) {
+    //console.log(`'${msg.username}' is on blocked users list.`);
     return;
   }
   
@@ -217,6 +244,8 @@ async function onMessage(msg) {
         await publishResponse(
             json.word,
             json.meanings[0].definitions[0].definition);
+        
+        cooldown.activate();
       }
     }
     

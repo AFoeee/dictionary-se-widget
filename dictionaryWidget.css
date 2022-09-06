@@ -8,15 +8,33 @@
    * kind of transition is mandatory for the widget to work properly. */
   opacity: 0;
   transition: opacity {{fadingDuration}}s;
+  
+  background: {{bgColor}};
 }
 
 #entry-word {
+  margin: 0px;
+  
+  /* Padding is affected by the background color. */
+  padding-top: {{overlayPadding_entryWord_top}}px;
+  padding-right: {{overlayPadding_entryWord_right}}px;
+  padding-bottom: {{overlayPadding_entryWord_bottom}}px;
+  padding-left:{{overlayPadding_entryWord_left}}px;
+  
   font-family: {{overlayFontFamily_entryWord}};
   font-size: {{overlayFontSize_entryWord}}px;
   color: {{overlayFontColor_entryWord}};
 }
 
 #meaning {
+  margin: 0px;
+  
+  /* Padding is affected by the background color. */
+  padding-top: {{overlayPadding_meaning_top}}px;
+  padding-right: {{overlayPadding_meaning_right}}px;
+  padding-bottom: {{overlayPadding_meaning_bottom}}px;
+  padding-left:{{overlayPadding_meaning_left}}px;
+  
   font-family: {{overlayFontFamily_meaning}};
   font-size: {{overlayFontSize_meaning}}px;
   color: {{overlayFontColor_meaning}};
