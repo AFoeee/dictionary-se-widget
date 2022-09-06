@@ -1,0 +1,155 @@
+{
+  "commandText": {
+    "type": "text", 
+    "label": "Associated command:", 
+    "value": "!dict", 
+    "group": "General Settings"
+  }, 
+  "permissionLvl": {
+    "type": "dropdown", 
+    "label": "Who can trigger the widget?", 
+    "options": {
+      "streamer": "Streamer", 
+      "mods": "Streamer + Mods", 
+      "everyone": "No restrictions"
+    }, 
+    "value": "mods", 
+    "group": "General Settings"
+  }, 
+  "otherUsers": {
+    "type": "text", 
+    "label": "Additional users (comma separated):", 
+    "value": "", 
+    "group": "General Settings"
+  }, 
+  "blockedUsers": {
+    "type": "text", 
+    "label": "Blocked users (comma separated):", 
+    "value": "", 
+    "group": "General Settings"
+  }, 
+  "cooldown": {
+    "type": "number", 
+    "label": "Cooldown for command in sec:", 
+    "min": 0, 
+    "value": 0, 
+    "step": 1, 
+    "group": "General Settings"
+  }, 
+  
+  "publishingMode": {
+    "type": "dropdown", 
+    "label": "Where to publish the response?", 
+    "options": {
+      "overlay": "Overlay", 
+      "chat": "Chat (requires jebaited.net token)"
+    }, 
+    "value": "overlay", 
+    "group": "Response Settings"
+  }, 
+  "jebaitedNetToken": {
+    "type": "text", 
+    "label": "jebaited.net token:", 
+    "value": "", 
+    "group": "Response Settings"
+  }, 
+  
+  "sepOverlaySettings1": {
+    "type": "hidden", 
+    "label": "——————— Entry Word ———————", 
+    "group": "Overlay Settings"
+  }, 
+  "overlayFontFamily_entryWord": {
+    "type": "text", 
+    "label": "Google font family:", 
+    "value": "Secular One", 
+    "group": "Overlay Settings"
+  }, 
+  "overlayFontSize_entryWord": {
+    "type": "number", 
+    "label": "Font size in px:", 
+    "min": 1, 
+    "value": 30, 
+    "step": 1, 
+    "group": "Overlay Settings"
+  }, 
+  "overlayFontColor_entryWord": {
+    "type": "colorpicker", 
+    "label": "Font color:", 
+    "value": "rgba(2, 11, 180, 1.0)", 
+    "group": "Overlay Settings"
+  }, 
+  "sepOverlaySettings2": {
+    "type": "hidden", 
+    "label": "———————— Meaning ————————", 
+    "group": "Overlay Settings"
+  }, 
+  "overlayFontFamily_meaning": {
+    "type": "text", 
+    "label": "Google font family:", 
+    "value": "Crimson Text", 
+    "group": "Overlay Settings"
+  }, 
+  "overlayFontSize_meaning": {
+    "type": "number", 
+    "label": "Font size in px:", 
+    "min": 1, 
+    "value": 25, 
+    "step": 1, 
+    "group": "Overlay Settings"
+  }, 
+  "overlayFontColor_meaning": {
+    "type": "colorpicker", 
+    "label": "Font color:", 
+    "value": "rgba(0, 0, 0, 1.0)", 
+    "group": "Overlay Settings"
+  }, 
+  "sepOverlaySettings3": {
+    "type": "hidden", 
+    "label": "——————— Animation ———————", 
+    "group": "Overlay Settings"
+  }, 
+  "displayDuration": {
+    "type": "number", 
+    "label": "Display time in sec (0 = permanent):", 
+    "min": 0, 
+    "value": 15.0, 
+    "step": 0.1, 
+    "group": "Overlay Settings"
+  }, 
+  "fadingDuration": {
+    "type": "number", 
+    "label": "Fading duration in sec:", 
+    "min": 0, 
+    "value": 1.2, 
+    "step": 0.1, 
+    "group": "Overlay Settings"
+  }, 
+  
+  "testMode": {
+    "type": "dropdown", 
+    "label": "Test mode:", 
+    "options": {
+      "on": "Enabled", 
+      "off": "Disabled"
+    }, 
+    "value": "off", 
+    "group": "Test Mode"
+  }, 
+  
+  "widgetName": {
+    "type": "hidden", 
+    "value": "DictionaryWidget", 
+    "group": "Test Mode"
+  }, 
+  "widgetAuthor": {
+    "type": "hidden", 
+    "value": "avoeh", 
+    "group": "Test Mode"
+  }, 
+  "widgetVersion": {
+    "type": "hidden", 
+    "value": 1, 
+    "group": "Test Mode"
+  }
+}
