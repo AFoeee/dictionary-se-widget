@@ -53,6 +53,23 @@
     "value": "", 
     "group": "Response Settings"
   }, 
+  "sepResponseSettings": {
+    "type": "hidden", 
+    "label": "———————— Filters ————————", 
+    "group": "Response Settings"
+  }, 
+  "bannedEntryWords": {
+    "type": "text", 
+    "label": "Ignored entry words (comma separated):", 
+    "value": "", 
+    "group": "Response Settings"
+  }, 
+  "bannedWordsInMeanings": {
+    "type": "text", 
+    "label": "Ignore meanings with these words (comma separated):", 
+    "value": "", 
+    "group": "Response Settings"
+  }, 
   
   "bgColor": {
     "type": "colorpicker", 
@@ -62,7 +79,7 @@
   }, 
   "sepOverlaySettings": {
     "type": "hidden", 
-    "label": "——————— Animation ———————", 
+    "label": "———————— Animation ————————", 
     "group": "Overlay Settings"
   }, 
   "displayDuration": {
@@ -220,7 +237,7 @@
   }, 
   "widgetVersion": {
     "type": "hidden", 
-    "value": 2, 
+    "value": 3, 
     "group": "Test Mode"
   }
 }

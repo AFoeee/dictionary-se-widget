@@ -3,23 +3,19 @@
  */
 
 
-// Credentials for dictionary API.
-const baseUrl = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
-const init = {
-  method: 'GET'
-};
-
 let triggerPhrase;                  // Command text with appended whitespace.
 let isUsableByEveryone;             // If true, everyone can trigger the widget.
 let isUsableByMods;
 let otherUsers;                     // Those users can trigger the widget, too.
 let blockedUsers;                   // Those users are ignored by the widget.
+let bannedEntryWords;               // Don't show definitions for those words.
+let bannedInMeaningsRegex;          // Ignore meanings that match this regex.
 let displayMillis;                  // Hide after this many milliseconds.
+let jebaitedToken;                  // jebaited.net token for posting chat messages.
 
-let publishResponse;
-let jebaitedToken;                  // jebaited.net token for posting chat msgs.
+let publishResponse;                // Holds the function for the selected publishing channel.
 
-let timeoutId = null;               // Used to cancel timeout.
+let timeoutId = null;               // Used to cancel remaining timeout.
 let isBlocked = true;               // Blocks the widget when busy.
 
 
@@ -73,6 +69,7 @@ const dictEntry = {
 
 // Publishing channel for the 'Overlay' option.
 async function changeEntry(word, meaning) {
+  // Get rid of any existing timeouts, since the display time gets restarted.
   if (timeoutId) {
     clearTimeout(timeoutId);
     timeoutId = null;
@@ -80,6 +77,7 @@ async function changeEntry(word, meaning) {
   
   await dictEntry.change(word, meaning);
   
+  // If enabled, hide the overlay after the specified amount of time.
   if(displayMillis) {
     timeoutId = setTimeout(() => {
       dictEntry.fadeOut();
@@ -111,7 +109,7 @@ const cooldown = {
 }
 
 
-// Load google font by name and use it for given element.
+// Load google font by name.
 function addGoogleFont(fontName) {
   const fontLink = document.createElement('link');
   fontLink.href = 
@@ -164,6 +162,8 @@ function onWidgetLoad(obj) {
       throw new Error(`Encountered unknown switch value: ${fieldData.publishingMode}`);
   }
   
+  /* A space is appended to ignore invocations without parameters (twitch cuts 
+   * off trailing whitespace). */
   triggerPhrase = fieldData.commandText.toLowerCase() + " ";
   
   isUsableByEveryone = (fieldData.permissionLvl === 'everyone');
@@ -179,6 +179,31 @@ function onWidgetLoad(obj) {
       .toLowerCase()
       .split(",");
   
+  /* Modified splitting procedure to allow spaces in multi-word elements and to 
+   * get rid of empty ones. */
+  bannedEntryWords = fieldData.bannedEntryWords
+      .toLowerCase()
+      .split(",")
+      .map((s) => s.trim())
+      .filter((s) => (s !== ''));
+  
+  // Basis for regex.
+  const bannedWordsInMeanings = fieldData.bannedWordsInMeanings
+      .toLowerCase()
+      .split(",")
+      .map((s) => s.trim())
+      .filter((s) => (s !== ''));
+  
+  if (bannedWordsInMeanings.length) {
+    /* Test for word boundaries around the banned words. Matches inside of other 
+     * words are ignored that way. */
+    const reStr = "\\b(" + bannedWordsInMeanings.join('|') + ")\\b";
+    
+    /* If any of the banned words is contained in the string to be tested, this 
+     * is interpreted as a match later on. */
+    bannedInMeaningsRegex = new RegExp(reStr, 'i');
+  }
+  
   addGoogleFont(fieldData.overlayFontFamily_entryWord);
   addGoogleFont(fieldData.overlayFontFamily_meaning);
   
@@ -190,6 +215,74 @@ function onWidgetLoad(obj) {
   }
   
   isBlocked = false;
+}
+
+
+function isEntryWordBanned(str) {
+  return bannedEntryWords.includes(str.toLowerCase());
+}
+
+
+function getValidatedMeaning(strArr) {
+  let meaning;
+  
+  // If the list of banned words isn't empty ...
+  if (bannedInMeaningsRegex) {
+    // ...find first element that doesn't contain banned words ...
+    meaning = strArr.find(
+        (str) => str && !bannedInMeaningsRegex.test(str));
+    
+  } else {
+    // ... else, find first element that isn't empty.
+    meaning = strArr.find((str) => str);
+  }
+  
+  return meaning;
+}
+
+
+/* Encapsulates the querying process. Change this if you want to use another 
+ * dictionary API. The implementation depends on used API. */
+async function queryDictAPI(str) {
+  const url = 
+      'https://api.dictionaryapi.dev/api/v2/entries/en/' + encodeURIComponent(str);
+  
+  const init = {
+    method: 'GET'
+  };
+  
+  const response = await fetch(url, init);
+  const data = await response.json();
+  
+  if (!data.length) {
+    throw new Error("API response data is empty.");
+  }
+  
+  const json = data[0];
+  
+  if (!json.meanings.length) {
+    throw new Error("Response doesn't contain meanings.");
+  }
+  
+  // The filter is applied here, to affect redirections by inflections, too.
+  if (isEntryWordBanned(json.word)) {
+    throw new Error(`'${json.word}' was banned by user.`);
+  }
+  
+  // Extract all the meanings for filtering.
+  const meanings = json.meanings.map(
+      (m) => m.definitions[0].definition);
+  
+  const validatedMeaning = getValidatedMeaning(meanings);
+  
+  if (!validatedMeaning) {
+    throw new Error("All meanings failed validation.");
+  }
+  
+  return {
+    entryWord: json.word, 
+    meaning: validatedMeaning
+  };
 }
 
 
@@ -234,21 +327,18 @@ async function onMessage(msg) {
         .substring(triggerPhrase.length)
         .toLowerCase();
     
-    const response = await fetch(baseUrl + encodeURIComponent(subStr), init);
-    const data = await response.json();
-    
-    if (data.length) {
-      const json = data[0];
+    try {
+      const response = await queryDictAPI(subStr);
       
-      if (json.meanings.length) {
-        await publishResponse(
-            json.word,
-            json.meanings[0].definitions[0].definition);
-        
-        cooldown.activate();
-      }
+      cooldown.activate();
+      
+      await publishResponse(response.entryWord, response.meaning);
+      
+    } catch (err) {
+      console.log(err.message);
+      
+    } finally {
+      isBlocked = false;
     }
-    
-    isBlocked = false;
   }
 }
