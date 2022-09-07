@@ -1,7 +1,7 @@
 # Dictionary Widget
 This StreamElements custom widget displays a dictionary definition for a given command parameter.  
 
-Special thanks to jevvv for the idea.  
+Special thanks to jevvv and c4ldas.  
 
 
 ## Description of operation:  

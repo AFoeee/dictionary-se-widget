@@ -1,7 +1,7 @@
 /**
  * This widget displays a dictionary definition for a given command parameter.
  * 
- * Special thanks to c4ldas.
+ * Special thanks to jevvv and c4ldas.
  */
 
 
