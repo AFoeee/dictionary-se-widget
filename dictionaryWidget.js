@@ -12,6 +12,7 @@ let bannedEntryWords;               // Don't show definitions for those words.
 let bannedInMeaningsRegex;          // Ignore meanings that match this regex.
 let displayMillis;                  // Hide after this many milliseconds.
 let jebaitedToken;                  // jebaited.net token for posting chat messages.
+let formattingScheme;               // Formatting instructions for chat responses.
 
 let publishResponse;                // Holds the function for the selected publishing channel.
 
@@ -89,9 +90,12 @@ async function changeEntry(word, meaning) {
 
 // Publishing channel for the 'Chat' option.
 async function postToChat(word, meaning) {
-  const encodedMsg = encodeURIComponent(`${word}: '${meaning}'`);
+  // Replace placeholders.
+  const msg = formattingScheme
+      .replaceAll('{entryWord}', word)
+      .replaceAll('{meaning}', meaning);
   
-  fetch(`https://api.jebaited.net/botMsg/${jebaitedToken}/${encodedMsg}`);
+  fetch(`https://api.jebaited.net/botMsg/${jebaitedToken}/${encodeURIComponent(msg)}`);
 }
 
 
@@ -106,17 +110,6 @@ const cooldown = {
   isActive() {
     return (Date.now() < this.cooldownEndEpoch);
   }
-}
-
-
-// Load google font by name.
-function addGoogleFont(fontName) {
-  const fontLink = document.createElement('link');
-  fontLink.href = 
-      `https://fonts.googleapis.com/css2?family=${fontName.replaceAll(" ", "+")}`;
-  fontLink.rel = 'stylesheet';
-  
-  document.head.appendChild(fontLink);
 }
 
 
@@ -154,6 +147,8 @@ function onWidgetLoad(obj) {
             "Deactivate widget: Publishing mode 'chat' but no jebaited.net token.");
         return;
       }
+      
+      formattingScheme = fieldData.formattingScheme;
       
       publishResponse = postToChat;
       break;
@@ -203,9 +198,6 @@ function onWidgetLoad(obj) {
      * is interpreted as a match later on. */
     bannedInMeaningsRegex = new RegExp(reStr, 'i');
   }
-  
-  addGoogleFont(fieldData.overlayFontFamily_entryWord);
-  addGoogleFont(fieldData.overlayFontFamily_meaning);
   
   cooldown.cooldownMillis = fieldData.cooldown * 1000;
   displayMillis = fieldData.displayDuration * 1000;

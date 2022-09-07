@@ -47,12 +47,6 @@
     "value": "overlay", 
     "group": "Response Settings"
   }, 
-  "jebaitedNetToken": {
-    "type": "text", 
-    "label": "jebaited.net token:", 
-    "value": "", 
-    "group": "Response Settings"
-  }, 
   "sepResponseSettings": {
     "type": "hidden", 
     "label": "———————— Filters ————————", 
@@ -100,7 +94,7 @@
   }, 
   
   "overlayFontFamily_entryWord": {
-    "type": "text", 
+    "type": "googleFont", 
     "label": "Google font family:", 
     "value": "Secular One", 
     "group": "Overlay Settings - Entry Word"
@@ -155,7 +149,7 @@
   
   
   "overlayFontFamily_meaning": {
-    "type": "text", 
+    "type": "googleFont", 
     "label": "Google font family:", 
     "value": "Crimson Text", 
     "group": "Overlay Settings - Meaning"
@@ -208,6 +202,19 @@
     "group": "Overlay Settings - Meaning"
   }, 
   
+  "jebaitedNetToken": {
+    "type": "text", 
+    "label": "jebaited.net token:", 
+    "value": "", 
+    "group": "Chat Settings"
+  }, 
+  "formattingScheme": {
+    "type": "text", 
+    "label": "Schema of the chat response:", 
+    "value": "'{entryWord}' is defined as '{meaning}'.", 
+    "group": "Chat Settings"
+  }, 
+  
   "testMode": {
     "type": "dropdown", 
     "label": "Test mode:", 
@@ -237,7 +244,7 @@
   }, 
   "widgetVersion": {
     "type": "hidden", 
-    "value": 3, 
+    "value": 4, 
     "group": "Test Mode"
   }
 }
