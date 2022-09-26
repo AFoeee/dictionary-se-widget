@@ -13,3 +13,8 @@ If you want to use another API, take a look at `queryDictAPI()` in the JavaScrip
  - `!dict WORD`  
    
    Queries the API for a definition of the provided `WORD` and publishes the response.  
+
+
+## Used libraries:  
+ - [Reboot0's Widget Tools](https://reboot0-de.github.io/se-tools/index.html)  
+ - [animate.css](https://github.com/animate-css/animate.css) (version 4.1.1)
