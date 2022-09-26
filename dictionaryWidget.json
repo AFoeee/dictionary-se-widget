@@ -5,6 +5,12 @@
     "value": "!dict", 
     "group": "General Settings"
   }, 
+  "commandAliases": {
+    "type": "text", 
+    "label": "Command aliases (comma separated):", 
+    "value": "", 
+    "group": "General Settings"
+  }, 
   "permissionLvl": {
     "type": "dropdown", 
     "label": "Who can trigger the widget?", 
@@ -37,182 +43,422 @@
     "group": "General Settings"
   }, 
   
-  "publishingMode": {
-    "type": "dropdown", 
-    "label": "Where to publish the response?", 
-    "options": {
-      "overlay": "Overlay", 
-      "chat": "Chat (requires jebaited.net token)"
-    }, 
-    "value": "overlay", 
-    "group": "Response Settings"
-  }, 
-  "sepResponseSettings": {
-    "type": "hidden", 
-    "label": "———————— Filters ————————", 
-    "group": "Response Settings"
-  }, 
-  "bannedEntryWords": {
-    "type": "text", 
-    "label": "Ignored entry words (comma separated):", 
-    "value": "", 
-    "group": "Response Settings"
-  }, 
-  "bannedWordsInMeanings": {
-    "type": "text", 
-    "label": "Ignore meanings with these words (comma separated):", 
-    "value": "", 
-    "group": "Response Settings"
-  }, 
-  
   "bgColor": {
     "type": "colorpicker", 
     "label": "Background Color:", 
     "value": "rgba(255, 255, 255, 0.5)", 
-    "group": "Overlay Settings"
-  }, 
-  "sepOverlaySettings": {
-    "type": "hidden", 
-    "label": "———————— Animation ————————", 
-    "group": "Overlay Settings"
-  }, 
-  "displayDuration": {
-    "type": "number", 
-    "label": "Display time in sec (0 = permanent):", 
-    "min": 0, 
-    "value": 30.0, 
-    "step": 0.1, 
-    "group": "Overlay Settings"
-  }, 
-  "fadingDuration": {
-    "type": "number", 
-    "label": "Fading duration in sec:", 
-    "min": 0, 
-    "value": 1.2, 
-    "step": 0.1, 
-    "group": "Overlay Settings"
+    "group": "Appearance"
   }, 
   
-  "overlayFontFamily_entryWord": {
+  "fontFamily_entryWord": {
     "type": "googleFont", 
     "label": "Google font family:", 
     "value": "Secular One", 
-    "group": "Overlay Settings - Entry Word"
+    "group": "Style – Entry Word"
   }, 
-  "overlayFontSize_entryWord": {
+  "fontSize_entryWord": {
     "type": "number", 
     "label": "Font size in px:", 
     "min": 1, 
     "value": 30, 
     "step": 1, 
-    "group": "Overlay Settings - Entry Word"
+    "group": "Style – Entry Word"
   }, 
-  "overlayFontColor_entryWord": {
+  "fontColor_entryWord": {
     "type": "colorpicker", 
     "label": "Font color:", 
     "value": "rgba(2, 11, 180, 1.0)", 
-    "group": "Overlay Settings - Entry Word"
+    "group": "Style – Entry Word"
   }, 
-  "sepOverlaySettings_entryWord": {
+  "sepPadding_entryWord": {
     "type": "hidden", 
     "label": "———————— Padding ————————", 
-    "group": "Overlay Settings - Entry Word"
+    "group": "Style – Entry Word"
   }, 
-  "overlayPadding_entryWord_top": {
+  "padding_upperBlock_top": {
     "type": "number", 
     "label": "Padding top in px:", 
     "value": 15, 
     "step": 1, 
-    "group": "Overlay Settings - Entry Word"
+    "group": "Style – Entry Word"
   }, 
-  "overlayPadding_entryWord_right": {
+  "padding_upperBlock_right": {
     "type": "number", 
     "label": "Padding right in px:", 
     "value": 20, 
     "step": 1, 
-    "group": "Overlay Settings - Entry Word"
+    "group": "Style – Entry Word"
   }, 
-  "overlayPadding_entryWord_bottom": {
+  "padding_upperBlock_bottom": {
     "type": "number", 
     "label": "Padding bottom in px:", 
     "value": 0, 
     "step": 1, 
-    "group": "Overlay Settings - Entry Word"
+    "group": "Style – Entry Word"
   }, 
-  "overlayPadding_entryWord_left": {
+  "padding_upperBlock_left": {
     "type": "number", 
     "label": "Padding left in px:", 
     "value": 20, 
     "step": 1, 
-    "group": "Overlay Settings - Entry Word"
+    "group": "Style – Entry Word"
   }, 
   
+  "displayMode_pronunciation": {
+    "type": "dropdown", 
+    "label": "Pronunciation segment is ...", 
+    "options": {
+      "inline-block": "visible", 
+      "none": "hidden"
+    }, 
+    "value": "inline-block", 
+    "group": "Style – Pronunciation"
+  }, 
+  "fontFamily_pronunciation": {
+    "type": "googleFont", 
+    "label": "Google font family:", 
+    "value": "Gentium Basic", 
+    "group": "Style – Pronunciation"
+  }, 
+  "fontSize_pronunciation": {
+    "type": "number", 
+    "label": "Font size in px:", 
+    "min": 1, 
+    "value": 20, 
+    "step": 1, 
+    "group": "Style – Pronunciation"
+  }, 
+  "fontColor_pronunciation": {
+    "type": "colorpicker", 
+    "label": "Font color:", 
+    "value": "rgba(0, 0, 0, 1.0)", 
+    "group": "Style – Pronunciation"
+  }, 
+  "sepPadding_pronunciation": {
+    "type": "hidden", 
+    "label": "———————— Padding ————————", 
+    "group": "Style – Pronunciation"
+  }, 
+  "padding_pronunciation_left": {
+    "type": "number", 
+    "label": "Padding left in px:", 
+    "value": 20, 
+    "step": 1, 
+    "group": "Style – Pronunciation"
+  }, 
   
-  "overlayFontFamily_meaning": {
+  "displayMode_partOfSpeech": {
+    "type": "dropdown", 
+    "label": "Part of Speech segment is ...", 
+    "options": {
+      "block": "visible", 
+      "none": "hidden"
+    }, 
+    "value": "block", 
+    "group": "Style – Part of Speech"
+  }, 
+  "fontFamily_partOfSpeech": {
+    "type": "googleFont", 
+    "label": "Google font family:", 
+    "value": "Secular One", 
+    "group": "Style – Part of Speech"
+  }, 
+  "fontSize_partOfSpeech": {
+    "type": "number", 
+    "label": "Font size in px:", 
+    "min": 1, 
+    "value": 20, 
+    "step": 1, 
+    "group": "Style – Part of Speech"
+  }, 
+  "fontColor_partOfSpeech": {
+    "type": "colorpicker", 
+    "label": "Font color:", 
+    "value": "rgba(0, 0, 0, 1.0)", 
+    "group": "Style – Part of Speech"
+  }, 
+  "sepPadding_partOfSpeech": {
+    "type": "hidden", 
+    "label": "———————— Padding ————————", 
+    "group": "Style – Part of Speech"
+  }, 
+  "padding_partOfSpeech_top": {
+    "type": "number", 
+    "label": "Padding top in px:", 
+    "value": 5, 
+    "step": 1, 
+    "group": "Style – Part of Speech"
+  }, 
+  "padding_partOfSpeech_right": {
+    "type": "number", 
+    "label": "Padding right in px:", 
+    "value": 20, 
+    "step": 1, 
+    "group": "Style – Part of Speech"
+  }, 
+  "padding_partOfSpeech_bottom": {
+    "type": "number", 
+    "label": "Padding bottom in px:", 
+    "value": 0, 
+    "step": 1, 
+    "group": "Style – Part of Speech"
+  }, 
+  "padding_partOfSpeech_left": {
+    "type": "number", 
+    "label": "Padding left in px:", 
+    "value": 20, 
+    "step": 1, 
+    "group": "Style – Part of Speech"
+  }, 
+  
+  "fontFamily_meaning": {
     "type": "googleFont", 
     "label": "Google font family:", 
     "value": "Crimson Text", 
-    "group": "Overlay Settings - Meaning"
+    "group": "Style – Meaning"
   }, 
-  "overlayFontSize_meaning": {
+  "fontSize_meaning": {
     "type": "number", 
     "label": "Font size in px:", 
     "min": 1, 
     "value": 25, 
     "step": 1, 
-    "group": "Overlay Settings - Meaning"
+    "group": "Style – Meaning"
   }, 
-  "overlayFontColor_meaning": {
+  "fontColor_meaning": {
     "type": "colorpicker", 
     "label": "Font color:", 
     "value": "rgba(0, 0, 0, 1.0)", 
-    "group": "Overlay Settings - Meaning"
+    "group": "Style – Meaning"
   }, 
-  "sepOverlaySettings_meaning": {
+  "sepPadding_meaning": {
     "type": "hidden", 
     "label": "———————— Padding ————————", 
-    "group": "Overlay Settings - Meaning"
+    "group": "Style – Meaning"
   }, 
-  "overlayPadding_meaning_top": {
+  "padding_meaning_top": {
     "type": "number", 
     "label": "Padding top in px:", 
     "value": 0, 
     "step": 1, 
-    "group": "Overlay Settings - Meaning"
+    "group": "Style – Meaning"
   }, 
-  "overlayPadding_meaning_right": {
+  "padding_meaning_right": {
     "type": "number", 
     "label": "Padding right in px:", 
     "value": 20, 
     "step": 1, 
-    "group": "Overlay Settings - Meaning"
+    "group": "Style – Meaning"
   }, 
-  "overlayPadding_meaning_bottom": {
+  "padding_meaning_bottom": {
     "type": "number", 
     "label": "Padding bottom in px:", 
     "value": 20, 
     "step": 1, 
-    "group": "Overlay Settings - Meaning"
+    "group": "Style – Meaning"
   }, 
-  "overlayPadding_meaning_left": {
+  "padding_meaning_left": {
     "type": "number", 
     "label": "Padding left in px:", 
     "value": 20, 
     "step": 1, 
-    "group": "Overlay Settings - Meaning"
+    "group": "Style – Meaning"
   }, 
   
-  "jebaitedNetToken": {
-    "type": "text", 
-    "label": "jebaited.net token:", 
-    "value": "", 
-    "group": "Chat Settings"
+  "animationIn_general": {
+    "type": "dropdown", 
+    "label": "AnimationIn:", 
+    "options": {
+      "backInDown": "backInDown", 
+      "backInLeft": "backInLeft", 
+      "backInRight": "backInRight", 
+      "backInUp": "backInUp", 
+      "bounceIn": "bounceIn", 
+      "bounceInDown": "bounceInDown", 
+      "bounceInLeft": "bounceInLeft", 
+      "bounceInRight": "bounceInRight", 
+      "bounceInUp": "bounceInUp", 
+      "fadeIn": "fadeIn", 
+      "fadeInBottomLeft": "fadeInBottomLeft", 
+      "fadeInBottomRight": "fadeInBottomRight", 
+      "fadeInDown": "fadeInDown", 
+      "fadeInDownBig": "fadeInDownBig", 
+      "fadeInLeft": "fadeInLeft", 
+      "fadeInLeftBig": "fadeInLeftBig", 
+      "fadeInRight": "fadeInRight", 
+      "fadeInRightBig": "fadeInRightBig", 
+      "fadeInTopLeft": "fadeInTopLeft", 
+      "fadeInTopRight": "fadeInTopRight", 
+      "fadeInUp": "fadeInUp", 
+      "fadeInUpBig": "fadeInUpBig", 
+      "flipInX": "flipInX", 
+      "flipInY": "flipInY", 
+      "jackInTheBox": "jackInTheBox", 
+      "lightSpeedInLeft": "lightSpeedInLeft", 
+      "lightSpeedInRight": "lightSpeedInRight", 
+      "rollIn": "rollIn", 
+      "rotateIn": "rotateIn", 
+      "rotateInDownLeft": "rotateInDownLeft", 
+      "rotateInDownRight": "rotateInDownRight", 
+      "rotateInUpLeft": "rotateInUpLeft", 
+      "rotateInUpRight": "rotateInUpRight", 
+      "slideInDown": "slideInDown", 
+      "slideInLeft": "slideInLeft", 
+      "slideInRight": "slideInRight", 
+      "slideInUp": "slideInUp", 
+      "zoomIn": "zoomIn", 
+      "zoomInDown": "zoomInDown", 
+      "zoomInLeft": "zoomInLeft", 
+      "zoomInRight": "zoomInRight", 
+      "zoomInUp": "zoomInUp"
+    }, 
+    "value": "fadeIn", 
+    "group": "Animation – In & Out"
   }, 
-  "formattingScheme": {
+  "timeIn_general": {
+    "type": "number", 
+    "label": "AnimationIn time in sec:", 
+    "min": 0, 
+    "value": 1.2, 
+    "step": 0.1, 
+    "group": "Animation – In & Out"
+  }, 
+  "sepAnimation_general": {
+    "type": "hidden", 
+    "label": "—————————————————————", 
+    "group": "Animation – In & Out"
+  }, 
+  "animationOut_general": {
+    "type": "dropdown", 
+    "label": "AnimationOut:", 
+    "options": {
+      "backOutDown": "backOutDown", 
+      "backOutLeft": "backOutLeft", 
+      "backOutRight": "backOutRight", 
+      "backOutUp": "backOutUp", 
+      "bounceOut": "bounceOut", 
+      "bounceOutDown": "bounceOutDown", 
+      "bounceOutLeft": "bounceOutLeft", 
+      "bounceOutRight": "bounceOutRight", 
+      "bounceOutUp": "bounceOutUp", 
+      "fadeOut": "fadeOut", 
+      "fadeOutBottomLeft": "fadeOutBottomLeft", 
+      "fadeOutBottomRight": "fadeOutBottomRight", 
+      "fadeOutDown": "fadeOutDown", 
+      "fadeOutDownBig": "fadeOutDownBig", 
+      "fadeOutLeft": "fadeOutLeft", 
+      "fadeOutLeftBig": "fadeOutLeftBig", 
+      "fadeOutRight": "fadeOutRight", 
+      "fadeOutRightBig": "fadeOutRightBig", 
+      "fadeOutTopLeft": "fadeOutTopLeft", 
+      "fadeOutTopRight": "fadeOutTopRight", 
+      "fadeOutUp": "fadeOutUp", 
+      "fadeOutUpBig": "fadeOutUpBig", 
+      "flipOutX": "flipOutX", 
+      "flipOutY": "flipOutY", 
+      "lightSpeedOutLeft": "lightSpeedOutLeft", 
+      "lightSpeedOutRight": "lightSpeedOutRight", 
+      "rollOut": "rollOut", 
+      "rotateOut": "rotateOut", 
+      "rotateOutDownLeft": "rotateOutDownLeft", 
+      "rotateOutDownRight": "rotateOutDownRight", 
+      "rotateOutUpLeft": "rotateOutUpLeft", 
+      "rotateOutUpRight": "rotateOutUpRight", 
+      "slideOutDown": "slideOutDown", 
+      "slideOutLeft": "slideOutLeft", 
+      "slideOutRight": "slideOutRight", 
+      "slideOutUp": "slideOutUp", 
+      "zoomOut": "zoomOut", 
+      "zoomOutDown": "zoomOutDown", 
+      "zoomOutLeft": "zoomOutLeft", 
+      "zoomOutRight": "zoomOutRight", 
+      "zoomOutUp": "zoomOutUp"
+    }, 
+    "value": "fadeOut", 
+    "group": "Animation – In & Out"
+  }, 
+  "timeOut_general": {
+    "type": "number", 
+    "label": "AnimationOut time in sec:", 
+    "min": 0, 
+    "value": 1.2, 
+    "step": 0.1, 
+    "group": "Animation – In & Out"
+  }, 
+  
+  "displayDuration_meaning": {
+    "type": "number", 
+    "label": "Display time per meaning in sec:", 
+    "min": 0, 
+    "value": 30.0, 
+    "step": 0.1, 
+    "group": "Animation – Multiple Meanings"
+  }, 
+  "sepAnimation_meaning1": {
+    "type": "hidden", 
+    "label": "———————— Animation ———————", 
+    "group": "Animation – Multiple Meanings"
+  }, 
+  "easingFunction_meaning": {
+    "type": "dropdown", 
+    "label": "Speed distribution (easing-function):", 
+    "options": {
+      "ease": "ease", 
+      "ease-in": "ease-in", 
+      "ease-in-out": "ease-in-out", 
+      "ease-out": "ease-out", 
+      "linear": "linear"
+    }, 
+    "value": "ease-out", 
+    "group": "Animation – Multiple Meanings"
+  }, 
+  "transitionDuration_meaning": {
+    "type": "number", 
+    "label": "Transition duration in sec:", 
+    "min": 0, 
+    "value": 0.5, 
+    "step": 0.1, 
+    "group": "Animation – Multiple Meanings"
+  }, 
+  
+  
+  "sepFilter1": {
+    "type": "hidden", 
+    "label": "——————— Ignore Lists ———————", 
+    "group": "Filter Settings"
+  }, 
+  "bannedEntryWords": {
     "type": "text", 
-    "label": "Schema of the chat response:", 
-    "value": "'{entryWord}' is defined as '{meaning}'.", 
-    "group": "Chat Settings"
+    "label": "Entry words (comma separated):", 
+    "value": "", 
+    "group": "Filter Settings"
+  }, 
+  "bannedWordsInMeanings": {
+    "type": "text", 
+    "label": "Words in meanings (comma separated):", 
+    "value": "", 
+    "group": "Filter Settings"
+  }, 
+  "sepFilter2": {
+    "type": "hidden", 
+    "label": "————————— Limits ————————", 
+    "group": "Filter Settings"
+  }, 
+  "limitPartOfSpeech": {
+    "type": "number", 
+    "label": "Part of Speech (0 = no limit):", 
+    "min": 0, 
+    "value": 0, 
+    "step": 1, 
+    "group": "Filter Settings"
+  }, 
+  "limitMeanings": {
+    "type": "number", 
+    "label": "Meanings per category (0 = no limit):", 
+    "min": 0, 
+    "value": 1, 
+    "step": 1, 
+    "group": "Filter Settings"
   }, 
   
   "testMode": {
@@ -244,7 +490,7 @@
   }, 
   "widgetVersion": {
     "type": "hidden", 
-    "value": 4, 
+    "value": 5, 
     "group": "Test Mode"
   }
 }

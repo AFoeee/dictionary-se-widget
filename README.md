@@ -8,8 +8,6 @@ Special thanks to jevvv and c4ldas.
 The widget serves as a front-end to a dictionary API (default is the [Free Dictionary API](https://dictionaryapi.dev/)).  
 If you want to use another API, take a look at `queryDictAPI()` in the JavaScript file.  
 
-Responses can either be displayed in the overlay or posted to the twitch chat.  
-
 
 ## Chat command types:  
  - `!dict WORD`  

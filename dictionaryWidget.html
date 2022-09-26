@@ -1,10 +1,19 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
 <script defer src="https://reboot0.de/hosted/js/se-tools.min.js"></script>
 
 <div class="main-container">
-  <div id="dictionary-entry">
-    <p id="entry-word"></p>
-    <p id="meaning"></p>
+  <div id="dictionary-entry" class="invisible">
+    <div id="upper-block">
+      <span id="entry-word"></span>
+      <span id="pronunciation"></span>
+    </div>
+    
+    <div id="lower-block">
+      <p id="part-of-speech"></p>
+      <p id="meaning"></p>
+    </div>
   </div>
 </div>

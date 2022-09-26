@@ -1,44 +1,83 @@
-@import url('https://fonts.googleapis.com/css2?family={{overlayFontFamily_entryWord}}');
-@import url('https://fonts.googleapis.com/css2?family={{overlayFontFamily_meaning}}');
+@import url('https://fonts.googleapis.com/css2?family={{fontFamily_entryWord}}');
+@import url('https://fonts.googleapis.com/css2?family={{fontFamily_pronunciation}}');
+@import url('https://fonts.googleapis.com/css2?family={{fontFamily_partOfSpeech}}');
+@import url('https://fonts.googleapis.com/css2?family={{fontFamily_meaning}}');
 
 .main-container {
   width: 100%;
   height: 95%;
 }
 
-#dictionary-entry {
-  /* The 'transitionend' event is used to coordinate functions. Therefore any 
-   * kind of transition is mandatory for the widget to work properly. */
-  opacity: 0;
-  transition: opacity {{fadingDuration}}s;
-  
+#upper-block {
   background: {{bgColor}};
+  
+  margin: 0px;
+  
+  /* Padding is affected by the background color. */
+  padding-top: {{padding_upperBlock_top}}px;
+  padding-right: {{padding_upperBlock_right}}px;
+  padding-bottom: {{padding_upperBlock_bottom}}px;
+  padding-left: {{padding_upperBlock_left}}px;
 }
 
 #entry-word {
+  font-family: {{fontFamily_entryWord}};
+  font-size: {{fontSize_entryWord}}px;
+  color: {{fontColor_entryWord}};
+}
+
+#pronunciation {
+  display: {{displayMode_pronunciation}};
+  
+  padding-left: {{padding_pronunciation_left}}px;
+  
+  font-family: {{fontFamily_pronunciation}};
+  font-size: {{fontSize_pronunciation}}px;
+  color: {{fontColor_pronunciation}};
+}
+
+#lower-block {
+  transform: scaleY(1);
+  transform-origin: top;
+  
+  transition: transform {{transitionDuration_meaning}}s {{easingFunction_meaning}};
+}
+
+#part-of-speech {
+  display: {{displayMode_partOfSpeech}};
+  
+  background: {{bgColor}};
+  
   margin: 0px;
   
   /* Padding is affected by the background color. */
-  padding-top: {{overlayPadding_entryWord_top}}px;
-  padding-right: {{overlayPadding_entryWord_right}}px;
-  padding-bottom: {{overlayPadding_entryWord_bottom}}px;
-  padding-left:{{overlayPadding_entryWord_left}}px;
+  padding-top: {{padding_partOfSpeech_top}}px;
+  padding-right: {{padding_partOfSpeech_right}}px;
+  padding-bottom: {{padding_partOfSpeech_bottom}}px;
+  padding-left: {{padding_partOfSpeech_left}}px;
   
-  font-family: {{overlayFontFamily_entryWord}};
-  font-size: {{overlayFontSize_entryWord}}px;
-  color: {{overlayFontColor_entryWord}};
+  font-family: {{fontFamily_partOfSpeech}};
+  font-size: {{fontSize_partOfSpeech}}px;
+  color: {{fontColor_partOfSpeech}};
 }
 
 #meaning {
+  background: {{bgColor}};
+  
   margin: 0px;
   
   /* Padding is affected by the background color. */
-  padding-top: {{overlayPadding_meaning_top}}px;
-  padding-right: {{overlayPadding_meaning_right}}px;
-  padding-bottom: {{overlayPadding_meaning_bottom}}px;
-  padding-left:{{overlayPadding_meaning_left}}px;
+  padding-top: {{padding_meaning_top}}px;
+  padding-right: {{padding_meaning_right}}px;
+  padding-bottom: {{padding_meaning_bottom}}px;
+  padding-left: {{padding_meaning_left}}px;
   
-  font-family: {{overlayFontFamily_meaning}};
-  font-size: {{overlayFontSize_meaning}}px;
-  color: {{overlayFontColor_meaning}};
+  font-family: {{fontFamily_meaning}};
+  font-size: {{fontSize_meaning}}px;
+  color: {{fontColor_meaning}};
+}
+
+/* To prevent any flickering, the widget is invisible at first. */
+.invisible {
+  opacity: 0;
 }
