@@ -17,4 +17,4 @@ If you want to use another API, take a look at `queryDictAPI()` in the JavaScrip
 
 ## Used libraries:  
  - [Reboot0's Widget Tools](https://reboot0-de.github.io/se-tools/index.html)  
- - [animate.css](https://github.com/animate-css/animate.css) (version 4.1.1)
+ - [animate.css](https://github.com/animate-css/animate.css)
